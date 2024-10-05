@@ -1,17 +1,21 @@
-FROM python:3.9
+# Use an official Python runtime as a parent image
+FROM python:3.9-slim
 
-# download this https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2net.onnx
-# copy model to avoid unnecessary download
-COPY u2net.onnx /home/.u2net/u2net.onnx
-
+# Set the working directory inside the container
 WORKDIR /app
 
+# Copy the requirements.txt file to the container
 COPY requirements.txt .
 
+# Install the required packages
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy the current directory contents into the container at /app
 COPY . .
 
+# Expose the port that the Flask app runs on
 EXPOSE 5100
 
-CMD ["python", "app.py"]
+# Command to run the Flask application using gunicorn for production
+CMD ["gunicorn", "--bind", "0.0.0.0:5100", "app:app", "--workers=4"]
+
