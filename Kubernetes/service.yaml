@@ -5,10 +5,9 @@ metadata:
   labels:
     app: background-remover-python-app
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
   - port: 5100
     targetPort: 5100
-    nodePort: 30001
   selector:
     app: background-remover-python-app
