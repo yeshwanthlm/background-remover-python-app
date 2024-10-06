@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: background-remover-python-app
+  labels:
+    app: background-remover-python-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: background-remover-python-app
+  template:
+    metadata:
+      labels:
+        app: background-remover-python-app
+    spec:
+      containers:
+      - name: background-remover-python-app
+        image: amonkincloud/background-remover-python-app:latest
+        ports:
+        - containerPort: 5100
