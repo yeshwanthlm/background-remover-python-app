@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: background-remover-python-app
+  labels:
+    app: background-remover-python-app
+spec:
+  type: NodePort
+  ports:
+  - port: 5100
+    targetPort: 5100
+    nodePort: 30001
+  selector:
+    app: background-remover-python-app
